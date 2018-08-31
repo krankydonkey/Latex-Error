@@ -1,19 +1,29 @@
 class Operator:
-    def __init__(self, function, associativity, priority):
+    def __init__(self, string, function, associativity, priority):
+        self.string = string
         self.function = function
         self.associativity = associativity
         self.priority = priority
+
+    def __str__(self):
+        return self.string
+        
+    def __repr__(self):
+        return self.string
+        
 
 class Function:
     def __init__(self, function):
         self.function = function
 
+FINAL = Operator("", None, "Left", 0)
+
 OPERATORS = {
-    '+' : Operator(None, "Left", 1),
-    '-' : Operator(None, "Left", 1),
-    '*' : Operator(None, "Left", 2),
-    '/' : Operator(None, "Left", 2),
-    '^' : Operator(None, "Right", 3)
+    '+' : Operator("+", None, "Left", 1),
+    '-' : Operator("-", None, "Left", 1),
+    '*' : Operator("*", None, "Left", 2),
+    '/' : Operator("/", None, "Left", 2),
+    '^' : Operator("^", None, "Right", 3)
 }
 
 FUNCTIONS = {
