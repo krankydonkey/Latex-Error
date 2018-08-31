@@ -5,6 +5,8 @@ class Shunt:
         self.output = []
         self.operators = []
 
+    # Determines wether the given string is a number, variable, or function,
+    # and adds it to the appropriate stack.
     def process(self, string):
         if string == "":
             return
@@ -70,7 +72,7 @@ class Shunt:
             else:
                 current = current + char
         self.process(current)
-        self.output += self.operators[::-1]
+        self.output.extend(reversed(self.operators))
         return self.output        
 
 shunter = Shunt()

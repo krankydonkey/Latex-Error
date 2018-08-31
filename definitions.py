@@ -22,6 +22,7 @@ class Function:
         
     def __repr__(self):
         return self.string
+        
 
 OPERATORS = {
     '+' : Operator("+", None, "Left", 1),
