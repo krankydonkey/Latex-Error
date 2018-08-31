@@ -13,10 +13,15 @@ class Operator:
         
 
 class Function:
-    def __init__(self, function):
+    def __init__(self, string, function):
+        self.string = string
         self.function = function
-
-FINAL = Operator("", None, "Left", 0)
+    
+    def __str__(self):
+        return self.string
+        
+    def __repr__(self):
+        return self.string
 
 OPERATORS = {
     '+' : Operator("+", None, "Left", 1),
@@ -27,23 +32,23 @@ OPERATORS = {
 }
 
 FUNCTIONS = {
-    "sqrt" : Function(None),
-    "exp" : Function(None),
-    "sin" : Function(None),
-    "cos" : Function(None),
-    "tan" : Function(None),
-    "sinh" : Function(None),
-    "cosh" : Function(None),
-    "tanh" : Function(None),
-    "arcsin" : Function(None),
-    "arccos" : Function(None),
-    "arctan" : Function(None),
-    "arcsinh" : Function(None),
-    "arccosh" : Function(None),
-    "arctanh" : Function(None),
-    "ln" : Function(None),
-    "log" : Function(None),
-    "!" : Function(None)
+    "sqrt" : Function("sqrt", None),
+    "exp" : Function("exp", None),
+    "sin" : Function("sin", None),
+    "cos" : Function("cos", None),
+    "tan" : Function("tan", None),
+    "sinh" : Function("sinh", None),
+    "cosh" : Function("cosh", None),
+    "tanh" : Function("tanh", None),
+    "arcsin" : Function("arcsin", None),
+    "arccos" : Function("arccos", None),
+    "arctan" : Function("arctan", None),
+    "arcsinh" : Function("arcsinh", None),
+    "arccosh" : Function("arccosh", None),
+    "arctanh" : Function("arctanh", None),
+    "ln" : Function("ln", None),
+    "log" : Function("log", None),
+    "!" : Function("!", None)
 }
 
 CONSTANTS = {
