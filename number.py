@@ -22,8 +22,8 @@ class Number:
 
     def getError(self):
         string = "\\begin{align*}\n" \
-                + diff(self.string) + " &= " + self.error_vars + " \\\\\n" \
-                + "&= " + self.error_nums + " \\\\\n" \
+                + diff(enclose(self.string)) + " &= " + self.error_vars \
+                + " \\\\\n" + "&= " + self.error_nums + " \\\\\n" \
                 + "&= " + str(self.error) + "\n" \
                 + "\\end{align*}"
         return string
@@ -82,8 +82,8 @@ def addsub(num1, num2, value, string):
     error = math.sqrt(num1.error**2 + num2.error**2)
     error_vars = root(square(diff(num1.string)) + ADD \
             + square(diff(num2.string)))
-    error_nums = root(square(diff(str(num1.error))) + ADD \
-            + square(diff(str(num2.error))))
+    error_nums = root(square(str(num1.error)) + ADD \
+            + square(str(num2.error)))
     return Number(value, error, string, error_vars, error_nums)
 
 def add(num1, num2):
@@ -153,7 +153,11 @@ def cos(num):
     return Number(value, error, string, error_vars, error_nums)
 
 def tan(num):
-    return divide(sin(num), cos(num))
+    sinNum = sin(num)
+    cosNum = cos(num)
+    value = sinNum.value/cosNum.value
+    string = "tan " + enclose(num.string)
+    return muldiv(sinNum, cosNum, value, string)
 
 def sinh(num):
     value = math.sinh(num.value)
@@ -172,7 +176,11 @@ def cosh(num):
     return Number(value, error, string, error_vars, error_nums)
 
 def tanh(num):
-    return divide(sinh(num), cosh(num))
+    sinhNum = sinh(num)
+    coshNum = cosh(num)
+    value = sinhNum.value/coshNum.value
+    string = "tanh " + enclose(num.string)
+    return muldiv(sinhNum, coshNum, value, string)
 
 def exp(num):
     value = math.exp(num.value)

@@ -3,7 +3,7 @@ import os
 
 num1 = Number(5, 0.25, "a")
 num2 = Number(2, 0.5, "b")
-num3 = divide(num1, num2)
+num3 = log(10, num1)
 
 file = open("testout.tex", 'w')
 file.write("\\documentclass[a4paper]{article}\n")
