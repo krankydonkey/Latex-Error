@@ -14,7 +14,7 @@ variables = {
     "c" : num3,
     "d" : num4
 }
-expression = "log10(a)"
+expression = "1/((b+log10(a+5*d^2))*5)"
 shunter = Shunt()
 output = shunter.convert(expression)
 print(output)

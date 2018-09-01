@@ -54,6 +54,10 @@ def mag(string):
 def diff(string):
     return "\\Delta " + string
 
+# Returns the string natural log of the given string.
+def natlog(string):
+    return "ln " + enclose(string)
+
 # Returns the given string squared
 def square(string):
     return order(string, "2")
@@ -69,12 +73,6 @@ def little(string1, string2):
 # Converts the two strings into a fraction.
 def fraction(string1, string2):
     return "\\dfrac{ " + string1 + " }{ " + string2 + " }"
-
-# Returns the string natural log of the given string.
-def natlog(string):
-    return "ln " + enclose(string)
-
-
 
 # Returns the error of the number as a percentage of its value.
 def percent(num):
@@ -321,6 +319,44 @@ def complicated(func, num):
     return Number(num1.value, num1.string, error, num1.string_nums, \
             error_vars, error_nums)
 """
+
+
+
+###############################################################################
+# START STUPID SHIT ###########################################################
+###############################################################################
+
+# Returns true if the given string is a fraction.
+def isFrac(string):
+    return string[0:6] == "\\dfrac"
+
+# Seperates the given fraction string into numerator and denominator.
+def seperate(string):
+    index = 7
+    count = 1
+    while count:
+        char = string[index]
+        if char == '{':
+            count += 1
+        elif char == '}':
+            count -= 1
+        index += 1
+    numerator = string[7:index-1]
+    index += 1
+    start = index
+    count = 1
+    while count:
+        char = string[index]
+        if char == '{':
+            count += 1
+        elif char == '}':
+            count -= 1
+        index += 1
+    denominator = string[start:index-1]
+    return(denominator)
+    
+string = "\\dfrac{fik}{fek}"
+print(seperate(string))
 
 
 
