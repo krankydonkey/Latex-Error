@@ -244,6 +244,19 @@ def log(base, num):
 # COMPLICATED FUNCTIONS #######################################################
 ###############################################################################
 
+def asin(num):
+    value = math.asin(num.value)
+    string = "\\asin " + enclose(num.string)
+    string_nums = "\\asin " + enclose(rstr(num.value))
+    error = 1/math.sqrt(1-num.value**2)
+    error_vars = fraction("1", "1 - " + square(enclose(num.string))) \
+            + PRODUCT + diff(enclose(num.string))
+    error_nums = fraction("1", "1 - " + square(rstr(num.value))) \
+            + PRODUCT + diff(rstr(num.value))
+    return Number(value, string, error, string_nums, error_vars, error_nums)
+
+
+"""
 def complicated(func, num):
     errorNum = Number(num.error, diff(enclose(num.string)))
     num1 = func(num)
@@ -289,7 +302,7 @@ def atanh(num):
     string = "\\atanh " + enclose(num.string)
     string_nums = "\\atanh " + enclose(rstr(num.value))
     return Number(value, string, 0, string_nums)
-
+"""
 
 
 
