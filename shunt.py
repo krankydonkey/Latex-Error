@@ -4,6 +4,7 @@ class Shunt:
     def __init__(self):
         self.output = []
         self.operators = []
+        self.prevOp = True
 
     # Determines wether the given string is a number, variable, or function,
     # and adds it to the appropriate stack.
@@ -14,6 +15,7 @@ class Shunt:
             self.operators.append(FUNCTIONS.get(string))
         else:
             self.output.append(string)
+        self.prevOp = False
     
     # Looks at operators on the top of the stack and transfers them to the output
     # stack if their priority is greater than the given operator, or is equal to
@@ -25,6 +27,9 @@ class Shunt:
             prev = self.operators[-1]
             if prev == '(':
                 break
+            elif type(prev) is Function:
+                self.output.append(self.operators.pop())
+                continue
             prev_priority = prev.priority
             if prev_priority > priority:
                 self.output.append(self.operators.pop())
@@ -60,7 +65,11 @@ class Shunt:
             if char in OPERATORS:
                 self.process(current)
                 current = ""
-                self.consume(OPERATORS.get(char))
+                if self.prevOp:
+                    self.process(char)
+                else:
+                    self.consume(OPERATORS.get(char))
+                self.prevOp = True
             elif char == '(':
                 self.process(current)
                 current = ""
@@ -76,4 +85,4 @@ class Shunt:
         return self.output        
 
 shunter = Shunt()
-print(shunter.convert("a*b+c*sin(d*cos(e))"))
+print(shunter.convert("a*b+c*sin(d-cos(e))"))

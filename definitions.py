@@ -33,6 +33,7 @@ OPERATORS = {
 }
 
 FUNCTIONS = {
+    "-" : Function("-", None),
     "sqrt" : Function("sqrt", None),
     "exp" : Function("exp", None),
     "sin" : Function("sin", None),
