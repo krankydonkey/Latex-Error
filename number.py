@@ -2,6 +2,7 @@ import math
 
 ADD = " + "
 PRODUCT = " \\times "
+DECIMALS = 5
 
 class Number:
     def __init__(self, value, error, string="", error_vars="", error_nums=""):
@@ -12,10 +13,10 @@ class Number:
         self.error_nums = error_nums
 
     def __str__(self):
-        return str(self.value) + " +- " + str(self.error)
+        return rstr(self.value) + " +- " + rstr(self.error)
     
     def __repr__(self):
-        return str(self.value) + " +- " + str(self.error)
+        return rstr(self.value) + " +- " + rstr(self.error)
     
     def isConstant(self):
         return self.error == 0
@@ -24,11 +25,15 @@ class Number:
         string = "\\begin{align*}\n" \
                 + diff(enclose(self.string)) + " &= " + self.error_vars \
                 + " \\\\\n" + "&= " + self.error_nums + " \\\\\n" \
-                + "&= " + str(self.error) + "\n" \
+                + "&= " + rstr(self.error) + "\\\\[4mm]\n" \
+                + "\\therefore " + self.string + " &= " + rstr(self.value) \
+                + " \pm " + rstr(self.error) + "\n" \
                 + "\\end{align*}"
         return string
 
 
+def rstr(number):
+    return str(round(number, DECIMALS))
 
 # Encloses the given string in latex brackets.
 def enclose(string):
@@ -82,8 +87,8 @@ def addsub(num1, num2, value, string):
     error = math.sqrt(num1.error**2 + num2.error**2)
     error_vars = root(square(diff(num1.string)) + ADD \
             + square(diff(num2.string)))
-    error_nums = root(square(str(num1.error)) + ADD \
-            + square(str(num2.error)))
+    error_nums = root(square(rstr(num1.error)) + ADD \
+            + square(rstr(num2.error)))
     return Number(value, error, string, error_vars, error_nums)
 
 def add(num1, num2):
@@ -112,8 +117,8 @@ def muldiv(num1, num2, value, string):
     error = abs(value*math.sqrt(delta1**2 + delta2**2))
     error_vars = mag(string) + root(square(enclose(percent_var(num1))) \
             + ADD + square(enclose(percent_var(num2))))
-    error_nums = mag(str(value)) + root(square(str(percent(num1))) + ADD \
-            + square(str(percent(num2))))
+    error_nums = mag(rstr(value)) + root(square(rstr(percent(num1))) + ADD \
+            + square(rstr(percent(num2))))
     return Number(value, error, string, error_vars, error_nums)
 
 def multiply(num1, num2):
@@ -132,8 +137,8 @@ def power(num1, num2):
     error = abs(value * num2.value * percent(num1))
     error_vars = mag(string + PRODUCT + num2.string + PRODUCT \
             + percent_var(num1))
-    error_nums = mag(str(value) + PRODUCT + str(num2.value) + PRODUCT \
-            + str(percent(num1)))
+    error_nums = mag(rstr(value) + PRODUCT + rstr(num2.value) + PRODUCT \
+            + rstr(percent(num1)))
     return Number(value, error, string, error_vars, error_nums)
 
 def sin(num):
@@ -141,7 +146,7 @@ def sin(num):
     string = "sin " + enclose(num.string)
     error = abs(math.cos(num.value)*num.error)
     error_vars = mag("cos " + enclose(num.string) + PRODUCT + diff(num.string))
-    error_nums = mag(str(math.cos(num.value)) + PRODUCT + str(num.error))
+    error_nums = mag(rstr(math.cos(num.value)) + PRODUCT + rstr(num.error))
     return Number(value, error, string, error_vars, error_nums)
 
 def cos(num):
@@ -149,7 +154,7 @@ def cos(num):
     string = "cos " + enclose(num.string)
     error = abs(math.sin(num.value)*num.error)
     error_vars = mag("sin " + enclose(num.string) + PRODUCT + diff(num.string))
-    error_nums = mag(str(math.sin(num.value)) + PRODUCT + str(num.error))
+    error_nums = mag(rstr(math.sin(num.value)) + PRODUCT + rstr(num.error))
     return Number(value, error, string, error_vars, error_nums)
 
 def tan(num):
@@ -164,7 +169,7 @@ def sinh(num):
     string = "sinh " + enclose(num.string)
     error = abs(math.cosh(num.value)*num.error)
     error_vars = mag("cosh " + enclose(num.string) + PRODUCT + diff(num.string))
-    error_nums = mag(str(math.cosh(num.value)) + PRODUCT + str(num.error))
+    error_nums = mag(rstr(math.cosh(num.value)) + PRODUCT + rstr(num.error))
     return Number(value, error, string, error_vars, error_nums)
 
 def cosh(num):
@@ -172,7 +177,7 @@ def cosh(num):
     string = "cosh " + enclose(num.string)
     error = abs(math.sinh(num.value)*num.error)
     error_vars = mag("sinh " + enclose(num.string) + PRODUCT + diff(num.string))
-    error_nums = mag(str(math.sinh(num.value)) + PRODUCT + str(num.error))
+    error_nums = mag(rstr(math.sinh(num.value)) + PRODUCT + rstr(num.error))
     return Number(value, error, string, error_vars, error_nums)
 
 def tanh(num):
@@ -187,7 +192,7 @@ def exp(num):
     string = order("e", num.string)
     error = abs(num.value*num.error)
     error_vars = mag(num.string + PRODUCT + diff(num.string))
-    error_nums = mag(str(num.value) + PRODUCT + str(num.error))
+    error_nums = mag(rstr(num.value) + PRODUCT + rstr(num.error))
     return Number(value, error, string, error_vars, error_nums)
 
 def ln(num):
@@ -195,17 +200,17 @@ def ln(num):
     string = natlog(num.string)
     error = percent(num)
     error_vars = mag(fraction(diff(num.string), num.string))
-    error_nums = mag(fraction(str(num.error), str(num.value)))
+    error_nums = mag(fraction(rstr(num.error), rstr(num.value)))
     return Number(value, error, string, error_vars, error_nums)
 
 def log(base, num):
     value = math.log(num.value, base)
-    string = little("log", str(base)) + enclose(num.string)
+    string = little("log", rstr(base)) + enclose(num.string)
     error = abs(percent(num)/math.log(base))
     error_vars = mag(fraction(diff(num.string), num.string + PRODUCT \
-            + natlog(str(base))))
-    error_nums = mag(fraction(str(num.error), str(num.value) + PRODUCT \
-            + str(math.log(base))))
+            + natlog(rstr(base))))
+    error_nums = mag(fraction(rstr(num.error), rstr(num.value) + PRODUCT \
+            + rstr(math.log(base))))
     return Number(value, error, string, error_vars, error_nums)
 
 

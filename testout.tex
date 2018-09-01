@@ -3,8 +3,9 @@
 \usepackage{amssymb}
 \begin{document}
 \begin{align*}
-\Delta \left( log_{ 10 }\left( a \right) \right) &= \left| \dfrac{ \Delta a }{ a \times ln \left( 10 \right) } \right| \\
-&= \left| \dfrac{ 0.25 }{ 5 \times 2.302585092994046 } \right| \\
-&= 0.02171472409516259
+\Delta \left( tanh \left( a \right) \right) &= \left| tanh \left( a \right) \right|\sqrt{ \left( \dfrac{ \Delta sinh \left( a \right) }{ sinh \left( a \right) } \right) ^ { 2 } + \left( \dfrac{ \Delta cosh \left( a \right) }{ cosh \left( a \right) } \right) ^ { 2 }} \\
+&= \left| 0.99991 \right|\sqrt{ 0.25002 ^ { 2 } + 0.24998 ^ { 2 }} \\
+&= 0.35352\\[4mm]
+\therefore tanh \left( a \right) &= 0.99991 \pm 0.35352
 \end{align*}
 \end{document}
