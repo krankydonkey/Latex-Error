@@ -246,15 +246,69 @@ def log(base, num):
 
 def asin(num):
     value = math.asin(num.value)
-    string = "\\asin " + enclose(num.string)
-    string_nums = "\\asin " + enclose(rstr(num.value))
-    error = 1/math.sqrt(1-num.value**2)
-    error_vars = fraction("1", "1 - " + square(enclose(num.string))) \
+    string = "\\arcsin " + enclose(num.string)
+    string_nums = "\\arcsin " + enclose(rstr(num.value))
+    error = num.error/math.sqrt(1-num.value**2)
+    error_vars = fraction("1", root("1 - " + square(enclose(num.string)))) \
             + PRODUCT + diff(enclose(num.string))
-    error_nums = fraction("1", "1 - " + square(rstr(num.value))) \
-            + PRODUCT + diff(rstr(num.value))
+    error_nums = fraction("1", root("1 - " + square(rstr(num.value)))) \
+            + PRODUCT + rstr(num.value)
     return Number(value, string, error, string_nums, error_vars, error_nums)
 
+def acos(num):
+    value = math.acos(num.value)
+    string = "\\arccos " + enclose(num.string)
+    string_nums = "\\arccos " + enclose(rstr(num.value))
+    error = num.error/math.sqrt(1-num.value**2)
+    error_vars = fraction("1", root("1 - " + square(enclose(num.string)))) \
+            + PRODUCT + diff(enclose(num.string))
+    error_nums = fraction("1", root("1 - " + square(rstr(num.value)))) \
+            + PRODUCT + rstr(num.value)
+    return Number(value, string, error, string_nums, error_vars, error_nums)
+
+def atan(num):
+    value = math.atan(num.value)
+    string = "\\arctan " + enclose(num.string)
+    string_nums = "\\arctan " + enclose(rstr(num.value))
+    error = num.error/(num.value**2 + 1)
+    error_vars = fraction("1", square(enclose(num.string)) + " + 1") \
+            + PRODUCT + diff(enclose(num.string))
+    error_nums = fraction("1", square(rstr(num.string)) + " + 1") \
+            + PRODUCT + rstr(num.string)
+    return Number(value, string, error, string_nums, error_vars, error_nums)
+
+def asinh(num):
+    value = math.asinh(num.value)
+    string = "\\text{arcsinh} " + enclose(num.string)
+    string_nums = "\\text{arcsinh} " + enclose(rstr(num.value))
+    error = num.error/math.sqrt(num.value**2 + 1)
+    error_vars = fraction("1", root(square(enclose(num.string)) + " + 1")) \
+            + PRODUCT + diff(enclose(num.string))
+    error_nums = fraction("1", root(square(rstr(num.value)) + " + 1")) \
+            + PRODUCT + rstr(num.value)
+    return Number(value, string, error, string_nums, error_vars, error_nums)
+
+def acosh(num):
+    value = math.acosh(num.value)
+    string = "\\text{arccosh} " + enclose(num.string)
+    string_nums = "\\text{arccosh} " + enclose(rstr(num.value))
+    error = num.error/math.sqrt(num.value**2 - 1)
+    error_vars = fraction("1", root(square(enclose(num.string)) + " - 1")) \
+            + PRODUCT + diff(enclose(num.string))
+    error_nums = fraction("1", root(square(rstr(num.value)) + " - 1")) \
+            + PRODUCT + rstr(num.value)
+    return Number(value, string, error, string_nums, error_vars, error_nums)
+
+def atanh(num):
+    value = math.atanh(num.value)
+    string = "\\text{arctanh} " + enclose(num.string)
+    string_nums = "\\text{arctanh} " + enclose(rstr(num.value))
+    error = num.error/(1-num.value**2)
+    error_vars = fraction("1", "1 - "  + square(enclose(num.string))) \
+            + PRODUCT + diff(enclose(num.string))
+    error_nums = fraction("1", "1 - " + square(rstr(num.string))) \
+            + PRODUCT + rstr(num.string)
+    return Number(value, string, error, string_nums, error_vars, error_nums)
 
 """
 def complicated(func, num):
@@ -266,42 +320,6 @@ def complicated(func, num):
     error_nums = mag(rstr(num1.value) + " - " + rstr(num2.value))
     return Number(num1.value, num1.string, error, num1.string_nums, \
             error_vars, error_nums)
-    
-def asin(num):
-    value = math.asin(num.value)
-    string = "\\asin " + enclose(num.string)
-    string_nums = "\\asin " + enclose(rstr(num.value))
-    return Number(value, string, 0, string_nums)
-
-def acos(num):
-    value = math.acos(num.value)
-    string = "\\acos " + enclose(num.string)
-    string_nums = "\\acos " + enclose(rstr(num.value))
-    return Number(value, string, 0, string_nums)
-
-def atan(num):
-    value = math.atan(num.value)
-    string = "\\atan " + enclose(num.string)
-    string_nums = "\\atan " + enclose(rstr(num.value))
-    return Number(value, string, 0, string_nums)
-
-def asinh(num):
-    value = math.asinh(num.value)
-    string = "\\asinh " + enclose(num.string)
-    string_nums = "\\asinh " + enclose(rstr(num.value))
-    return Number(value, string, 0, string_nums)
-
-def acosh(num):
-    value = math.acosh(num.value)
-    string = "\\acosh " + enclose(num.string)
-    string_nums = "\\acosh " + enclose(rstr(num.value))
-    return Number(value, string, 0, string_nums)
-
-def atanh(num):
-    value = math.atanh(num.value)
-    string = "\\atanh " + enclose(num.string)
-    string_nums = "\\atanh " + enclose(rstr(num.value))
-    return Number(value, string, 0, string_nums)
 """
 
 

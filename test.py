@@ -4,7 +4,7 @@ from shunt import Shunt
 from rpn import rpn
 
 
-num1 = Number(5, "a", 0.25)
+num1 = Number(120, "a", 0.25)
 num2 = Number(2, "b", 0.5)
 num3 = Number(3, "c", 0.125)
 num4 = Number(4, "d", 0.7)
@@ -14,7 +14,7 @@ variables = {
     "c" : num3,
     "d" : num4
 }
-expression = "a*b+c*sin(d)"
+expression = "acosh(a)"
 shunter = Shunt()
 output = shunter.convert(expression)
 print(output)
@@ -27,7 +27,7 @@ file.write("\\usepackage{amssymb}\n")
 file.write("\\begin{document}\n")
 
 number = rpn(output, variables, file)
-print(number)
+print(number.getError())
 file.write(number.getError()+"\n")
 
 
