@@ -1,3 +1,6 @@
+from number import *
+from functools import partial
+
 class Operator:
     def __init__(self, string, function, associativity, priority):
         self.string = string
@@ -25,36 +28,36 @@ class Function:
         
 
 OPERATORS = {
-    '+' : Operator("+", None, "Left", 1),
-    '-' : Operator("-", None, "Left", 1),
-    '*' : Operator("*", None, "Left", 2),
-    '/' : Operator("/", None, "Left", 2),
-    '^' : Operator("^", None, "Right", 3)
+    '+' : Operator("+", add, "Left", 1),
+    '-' : Operator("-", subtract, "Left", 1),
+    '*' : Operator("*", multiply, "Left", 2),
+    '/' : Operator("/", divide, "Left", 2),
+    '^' : Operator("^", power, "Right", 3)
 }
 
 FUNCTIONS = {
-    "-" : Function("-", None),
-    "sqrt" : Function("sqrt", None),
-    "exp" : Function("exp", None),
-    "sin" : Function("sin", None),
-    "cos" : Function("cos", None),
-    "tan" : Function("tan", None),
-    "sinh" : Function("sinh", None),
-    "cosh" : Function("cosh", None),
-    "tanh" : Function("tanh", None),
-    "arcsin" : Function("arcsin", None),
-    "arccos" : Function("arccos", None),
-    "arctan" : Function("arctan", None),
-    "arcsinh" : Function("arcsinh", None),
-    "arccosh" : Function("arccosh", None),
-    "arctanh" : Function("arctanh", None),
-    "ln" : Function("ln", None),
+    "-" : Function("-", negative),
+    "sqrt" : Function("sqrt", sqrt),
+    "exp" : Function("exp", exp),
+    "sin" : Function("sin", sin),
+    "cos" : Function("cos", cos),
+    "tan" : Function("tan", tan),
+    "sinh" : Function("sinh", sinh),
+    "cosh" : Function("cosh", cosh),
+    "tanh" : Function("tanh", tanh),
+    "asin" : Function("asin", partial(complicated, asin)),
+    "acos" : Function("acos", None),
+    "atan" : Function("atan", None),
+    "asinh" : Function("asinh", None),
+    "acosh" : Function("acosh", None),
+    "atanh" : Function("atanh", None),
+    "ln" : Function("ln", ln),
     "log" : Function("log", None),
     "!" : Function("!", None)
 }
 
 CONSTANTS = {
-    'g' : 9.81,
-    'c' : 299792458,
-    'e' : 2.718281828459
+    'g' : Number(9.81, "g"),
+    'c' : Number(299792458, "c"),
+    'e' : Number(2.718281828459, "e")
 }

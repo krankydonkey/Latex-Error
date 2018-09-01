@@ -3,11 +3,43 @@
 \usepackage{amssymb}
 \begin{document}
 \begin{align*}
-tanh \left( a \right) &= tanh \left( 5 \right) \\
-&= 0.99991 \\[4mm]
-\Delta \left( tanh \left( a \right) \right) &= \left| tanh \left( a \right) \right|\sqrt{ \left( \dfrac{ \Delta sinh \left( a \right) }{ sinh \left( a \right) } \right) ^ { 2 } + \left( \dfrac{ \Delta cosh \left( a \right) }{ cosh \left( a \right) } \right) ^ { 2 }} \\
-&= \left| 0.99991 \right|\sqrt{ 0.25002 ^ { 2 } + 0.24998 ^ { 2 }} \\
-&= 0.35352\\[4mm]
-\therefore tanh \left( a \right) &= 0.99991 \pm 0.35352
+a \cdot b &= 5 \cdot 2 \\
+&= 10 \\[4mm]
+\Delta \left( a \cdot b \right) &= \left| a \cdot b \right|\sqrt{ \left( \dfrac{ \Delta a }{ a } \right) ^ { 2 } + \left( \dfrac{ \Delta b }{ b } \right) ^ { 2 }} \\
+&= \left| 10 \right|\sqrt{ 0.05 ^ { 2 } + 0.25 ^ { 2 }} \\
+&= 2.54951\\[4mm]
+\therefore a \cdot b &= 10 \pm 2.54951
+\end{align*}
+\begin{align*}
+\sin \left( d \right) &= \sin \left( 4 \right) \\
+&= -0.7568 \\[4mm]
+\Delta \left( \sin \left( d \right) \right) &= \left| \cos \left( d \right) \cdot \Delta d \right| \\
+&= \left| -0.65364 \cdot 0.7 \right| \\
+&= 0.45755\\[4mm]
+\therefore \sin \left( d \right) &= -0.7568 \pm 0.45755
+\end{align*}
+\begin{align*}
+c \cdot \sin \left( d \right) &= 3 \cdot -0.7568 \\
+&= -2.27041 \\[4mm]
+\Delta \left( c \cdot \sin \left( d \right) \right) &= \left| c \cdot \sin \left( d \right) \right|\sqrt{ \left( \dfrac{ \Delta c }{ c } \right) ^ { 2 } + \left( \dfrac{ \Delta \sin \left( d \right) }{ \sin \left( d \right) } \right) ^ { 2 }} \\
+&= \left| -2.27041 \right|\sqrt{ 0.04167 ^ { 2 } + 0.60458 ^ { 2 }} \\
+&= 1.37591\\[4mm]
+\therefore c \cdot \sin \left( d \right) &= -2.27041 \pm 1.37591
+\end{align*}
+\begin{align*}
+a \cdot b + c \cdot \sin \left( d \right) &= 10 + -2.27041 \\
+&= 7.72959 \\[4mm]
+\Delta \left( a \cdot b + c \cdot \sin \left( d \right) \right) &= \sqrt{ \Delta \left( a \cdot b \right) ^ { 2 } + \Delta \left( c \cdot \sin \left( d \right) \right) ^ { 2 }} \\
+&= \sqrt{ 2.54951 ^ { 2 } + 1.37591 ^ { 2 }} \\
+&= 2.89709\\[4mm]
+\therefore a \cdot b + c \cdot \sin \left( d \right) &= 7.72959 \pm 2.89709
+\end{align*}
+\begin{align*}
+a \cdot b + c \cdot \sin \left( d \right) &= 10 + -2.27041 \\
+&= 7.72959 \\[4mm]
+\Delta \left( a \cdot b + c \cdot \sin \left( d \right) \right) &= \sqrt{ \Delta \left( a \cdot b \right) ^ { 2 } + \Delta \left( c \cdot \sin \left( d \right) \right) ^ { 2 }} \\
+&= \sqrt{ 2.54951 ^ { 2 } + 1.37591 ^ { 2 }} \\
+&= 2.89709\\[4mm]
+\therefore a \cdot b + c \cdot \sin \left( d \right) &= 7.72959 \pm 2.89709
 \end{align*}
 \end{document}
