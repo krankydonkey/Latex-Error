@@ -10,9 +10,24 @@ class Number:
         self.string = string
         self.error_vars = error_vars
         self.error_nums = error_nums
+
+    def __str__(self):
+        return str(self.value) + " +- " + str(self.error)
+    
+    def __repr__(self):
+        return str(self.value) + " +- " + str(self.error)
     
     def isConstant(self):
         return self.error == 0
+
+    def getError(self):
+        string = "\\begin{align*}\n" \
+                + diff(self.string) + " &= " + self.error_vars + " \\\\\n" \
+                + "&= " + self.error_nums + " \\\\\n" \
+                + "&= " + str(self.error) + "\n" \
+                + "\\end{align*}"
+        return string
+
 
 
 # Encloses the given string in latex brackets.
@@ -25,7 +40,7 @@ def root(string):
 
 # Encloses the given string in absolute value brackets.
 def mag(string):
-    return "| " + string + " |"
+    return "\\left| " + string + " \\right|"
 
 # Appends the delta symbol to the start of the given string.
 def diff(string):
@@ -81,15 +96,23 @@ def subtract(num1, num2):
     string = num1.string + " - " + num2.string
     return addsub(num1, num2, value, string)
 
+def negative(num):
+    value = -num.value
+    string = "- " + num.string
+    error = num.error
+    error_vars = num.error_vars
+    error_nums = num.error_nums
+    return Number(value, error, string, error_vars, error_nums)
+
 # Handles the error and associated string calculations for multiplication
 # and division.
 def muldiv(num1, num2, value, string):
     delta1 = num1.error/num1.value
     delta2 = num2.error/num2.value
-    error = value*math.sqrt(delta1**2 + delta2**2)
-    error_vars = string + root(square(enclose(percent_var(num1))) \
+    error = abs(value*math.sqrt(delta1**2 + delta2**2))
+    error_vars = mag(string) + root(square(enclose(percent_var(num1))) \
             + ADD + square(enclose(percent_var(num2))))
-    error_nums = str(value) + root(square(str(percent(num1))) + ADD \
+    error_nums = mag(str(value)) + root(square(str(percent(num1))) + ADD \
             + square(str(percent(num2))))
     return Number(value, error, string, error_vars, error_nums)
 
@@ -152,7 +175,7 @@ def tanh(num):
     return divide(sinh(num), cosh(num))
 
 def exp(num):
-    value = math.exp(num)
+    value = math.exp(num.value)
     string = order("e", num.string)
     error = abs(num.value*num.error)
     error_vars = mag(num.string + PRODUCT + diff(num.string))
@@ -170,18 +193,12 @@ def ln(num):
 def log(base, num):
     value = math.log(num.value, base)
     string = little("log", str(base)) + enclose(num.string)
-    error = abs(percent(num)/math.log(num.value))
+    error = abs(percent(num)/math.log(base))
     error_vars = mag(fraction(diff(num.string), num.string + PRODUCT \
-            + natlog(num.string)))
+            + natlog(str(base))))
     error_nums = mag(fraction(str(num.error), str(num.value) + PRODUCT \
-            + str(math.log(num.value))))
+            + str(math.log(base))))
     return Number(value, error, string, error_vars, error_nums)
-
-
-num1 = Number(2, 0.5, "a")
-num2 = Number(4, 0.25, "b")
-num3 = sin(num1)
-print(num3.error_vars)
 
 
 
