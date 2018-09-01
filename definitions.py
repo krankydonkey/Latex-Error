@@ -52,8 +52,7 @@ FUNCTIONS = {
     "acosh" : Function("acosh", acosh),
     "atanh" : Function("atanh", atanh),
     "ln" : Function("ln", ln),
-    "log" : Function("log", None),
-    "!" : Function("!", None)
+    "log" : Function("log", log)
 }
 
 CONSTANTS = {

@@ -1,4 +1,5 @@
 from definitions import OPERATORS, FUNCTIONS, Function
+from functools import partial
 
 class Shunt:
     def __init__(self):
@@ -13,6 +14,11 @@ class Shunt:
             return
         elif string in FUNCTIONS:
             self.operators.append(FUNCTIONS.get(string))
+        elif string[0:3] == "log":
+            function = FUNCTIONS.get("log")
+            base = int(string[3:])
+            function.function = partial(function.function, base)
+            self.operators.append(function)
         else:
             self.output.append(string)
         self.prevOp = False
@@ -83,6 +89,3 @@ class Shunt:
         self.process(current)
         self.output.extend(reversed(self.operators))
         return self.output        
-
-shunter = Shunt()
-print(shunter.convert("a*b+c*sin(d-cos(e))"))
