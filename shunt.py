@@ -84,6 +84,8 @@ class Shunt:
                 self.process(current)
                 current = ""
                 self.match_bracket()
+            elif char == ' ':
+                continue
             else:
                 current = current + char
         self.process(current)
