@@ -24,15 +24,15 @@ class Number:
         return self.error == 0
 
     def getError(self):
-        string = "\\begin{align*}\n" \
-                + self.string + " &= " + self.string_nums + " \\\\\n" \
-                + "&= " + rstr(self.value) + " \\\\[4mm]\n" \
+        string = "\\begin{flalign*}\n" \
+                + self.string + " &= " + self.string_nums + " &\\\\\n" \
+                + "&= " + rstr(self.value) + " &\\\\[4mm]\n" \
                 + diff(self.string) + " &= " + self.error_vars \
-                + " \\\\\n" + "&= " + self.error_nums + " \\\\\n" \
-                + "&= " + rstr(self.error) + "\\\\[4mm]\n" \
+                + " \\\\\n" + "&= " + self.error_nums + " &\\\\\n" \
+                + "&= " + rstr(self.error) + " &\\\\[4mm]\n" \
                 + "\\therefore " + self.string + " &= " + rstr(self.value) \
-                + " \\pm " + rstr(self.error) + "\n" \
-                + "\\end{align*}"
+                + " \\pm " + rstr(self.error) + " &\n" \
+                + "\\end{flalign*} \\vspace{4mm} \\hrule \\vspace{4mm}"
         return string
 
 def rstr(number):

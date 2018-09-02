@@ -3,11 +3,12 @@ from shunt import Shunt
 
 def read_structure(file):
     structure = []
-    line = (file.readline()[:-1]).split(",")
+    line = file.readline().strip()
+    line = line.replace(" ", "")
+    line = line.split(",")
     count = 0
     while count < len(line):
         var = line[count]
-        print(var)
         count += 1
         if count < len(line):
             if line[count] == "Error":
@@ -21,6 +22,7 @@ def read_vars(file, structure, variables):
     line = file.readline()
     if not line:
         return False
+    line = line.replace(" ", "")
     line = (line.strip()).split(",")
     count = 0
     for var, status in structure:
@@ -42,7 +44,9 @@ def read_vars(file, structure, variables):
 def read_formula(file):
     equations = []
     for line in file:
-        equation = (line.strip()).split("=")
+        equation = line.strip()
+        equation = equation.replace(" ", "")
+        equation = equation.split("=")
         shunt = Shunt()
         shunted = shunt.convert(equation[1])
         equations.append((equation[0], shunted))
