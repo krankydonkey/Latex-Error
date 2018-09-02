@@ -1,0 +1,44 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\begin{document}
+\begin{align*}
+12 \cdot b &= 12 \cdot 10 \\
+&= 120 \\[4mm]
+\Delta \left( 12 \cdot b \right) &= \left| 12 \cdot b \cdot \dfrac{ \Delta \left( b \right) }{ b } \right| \\
+&= \left| 120 \cdot 0.12 \right| \\
+&= 14.4\\[4mm]
+\therefore 12 \cdot b &= 120 \pm 14.4
+\end{align*}
+\begin{align*}
+12 \cdot b \cdot h &= 120 \cdot 14 \\
+&= 1680 \\[4mm]
+\Delta \left( 12 \cdot b \cdot h \right) &= \left| 12 \cdot b \cdot h \right|\sqrt{ \left( \dfrac{ \Delta \left( 12 \cdot b \right) }{ 12 \cdot b } \right) ^ { 2 } + \left( \dfrac{ \Delta \left( h \right) }{ h } \right) ^ { 2 }} \\
+&= \left| 1680 \right|\sqrt{ 0.12 ^ { 2 } + 0.05357 ^ { 2 }} \\
+&= 220.77717\\[4mm]
+\therefore 12 \cdot b \cdot h &= 1680 \pm 220.77717
+\end{align*}
+\begin{align*}
+10 ^ { 4 } &= 10 ^ { 4 } \\
+&= 10000 \\[4mm]
+\Delta \left( 10 ^ { 4 } \right) &= \left| 10 ^ { 4 } \cdot 4 \cdot \dfrac{ \Delta \left( 10 \right) }{ 10 } \right| \\
+&= \left| 10000 \cdot 4 \cdot 0 \right| \\
+&= 0\\[4mm]
+\therefore 10 ^ { 4 } &= 10000 \pm 0
+\end{align*}
+\begin{align*}
+\dfrac{ 12 \cdot b \cdot h }{ 10 ^ { 4 } } &= \dfrac{ 1680 }{ 10000 } \\
+&= 0.168 \\[4mm]
+\Delta \left( \dfrac{ 12 \cdot b \cdot h }{ 10 ^ { 4 } } \right) &= \left| \dfrac{ 12 \cdot b \cdot h }{ 10 ^ { 4 } } \cdot \dfrac{ \Delta \left( 12 \cdot b \cdot h \right) }{ 12 \cdot b \cdot h } \right| \\
+&= \left| 0.168 \cdot 0.13141 \right| \\
+&= 0.02208\\[4mm]
+\therefore \dfrac{ 12 \cdot b \cdot h }{ 10 ^ { 4 } } &= 0.168 \pm 0.02208
+\end{align*}
+\begin{align*}
+4 \cdot E &= 4 \cdot 5 \\
+&= 20 \\[4mm]
+\Delta \left( 4 \cdot E \right) &= \left| 4 \cdot E \cdot \dfrac{ \Delta \left( E \right) }{ E } \right| \\
+&= \left| 20 \cdot 0.05 \right| \\
+&= 1\\[4mm]
+\therefore 4 \cdot E &= 20 \pm 1
+\end{align*}

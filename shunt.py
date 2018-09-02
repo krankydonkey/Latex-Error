@@ -93,6 +93,7 @@ class Shunt:
                 current = ""
                 self.operators.append('(')
             elif char == ')':
+                print("HERE")
                 self.process(current)
                 current = ""
                 self.match_bracket()
