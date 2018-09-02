@@ -5,7 +5,7 @@
 \begin{align*}
 d ^ { 2 } &= 4 ^ { 2.0 } \\
 &= 16.0 \\[4mm]
-\Delta \left( d ^ { 2 } \right) &= \left| d ^ { 2 } \cdot 2 \cdot \dfrac{ \Delta d }{ d } \right| \\
+\Delta \left( d ^ { 2 } \right) &= \left| d ^ { 2 } \cdot 2 \cdot \dfrac{ \Delta \left( d \right) }{ d } \right| \\
 &= \left| 16.0 \cdot 2.0 \cdot 0.175 \right| \\
 &= 5.6\\[4mm]
 \therefore d ^ { 2 } &= 16.0 \pm 5.6
@@ -13,8 +13,8 @@ d ^ { 2 } &= 4 ^ { 2.0 } \\
 \begin{align*}
 5 \cdot d ^ { 2 } &= 5.0 \cdot 16.0 \\
 &= 80.0 \\[4mm]
-\Delta \left( 5 \cdot d ^ { 2 } \right) &= \left| 5 \cdot d ^ { 2 } \right|\sqrt{ \left( \dfrac{ \Delta 5 }{ 5 } \right) ^ { 2 } + \left( \dfrac{ \Delta d ^ { 2 } }{ d ^ { 2 } } \right) ^ { 2 }} \\
-&= \left| 80.0 \right|\sqrt{ 0.0 ^ { 2 } + 0.35 ^ { 2 }} \\
+\Delta \left( 5 \cdot d ^ { 2 } \right) &= \left| 5 \cdot d ^ { 2 } \cdot \dfrac{ \Delta \left( d ^ { 2 } \right) }{ d ^ { 2 } } \right| \\
+&= \left| 80.0 \cdot 0.35 \right| \\
 &= 28.0\\[4mm]
 \therefore 5 \cdot d ^ { 2 } &= 80.0 \pm 28.0
 \end{align*}
@@ -29,7 +29,7 @@ a + 5 \cdot d ^ { 2 } &= 5 + 80.0 \\
 \begin{align*}
 log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) &= log_{ 10 }\left( 85.0 \right) \\
 &= 1.92942 \\[4mm]
-\Delta \left( log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \right) &= \left| \dfrac{ \Delta a + 5 \cdot d ^ { 2 } }{ a + 5 \cdot d ^ { 2 } \cdot ln \left( 10 \right) } \right| \\
+\Delta \left( log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \right) &= \left| \dfrac{ \Delta \left( a + 5 \cdot d ^ { 2 } \right) }{ a + 5 \cdot d ^ { 2 } \cdot ln \left( 10 \right) } \right| \\
 &= \left| \dfrac{ 28.00112 }{ 85.0 \cdot 2.30259 } \right| \\
 &= 0.14307\\[4mm]
 \therefore log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) &= 1.92942 \pm 0.14307
@@ -45,24 +45,24 @@ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) &= 2 + 1.92942 \\
 \begin{align*}
 b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 &= 3.92942 \cdot 5.0 \\
 &= 19.64709 \\[4mm]
-\Delta \left( b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 \right) &= \left| b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 \right|\sqrt{ \left( \dfrac{ \Delta b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) } \right) ^ { 2 } + \left( \dfrac{ \Delta 5 }{ 5 } \right) ^ { 2 }} \\
-&= \left| 19.64709 \right|\sqrt{ 0.13235 ^ { 2 } + 0.0 ^ { 2 }} \\
+\Delta \left( b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 \right) &= \left| b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 \cdot \dfrac{ \Delta \left( b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \right) }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) } \right| \\
+&= \left| 19.64709 \cdot 0.13235 \right| \\
 &= 2.60033\\[4mm]
 \therefore b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 &= 19.64709 \pm 2.60033
 \end{align*}
 \begin{align*}
 \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } &= \dfrac{ 1.0 }{ 19.64709 } \\
 &= 0.0509 \\[4mm]
-\Delta \left( \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right) &= \left| \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right|\sqrt{ \left( \dfrac{ \Delta 1 }{ 1 } \right) ^ { 2 } + \left( \dfrac{ \Delta b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right) ^ { 2 }} \\
-&= \left| 0.0509 \right|\sqrt{ 0.0 ^ { 2 } + 0.13235 ^ { 2 }} \\
+\Delta \left( \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right) &= \left| \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \cdot \dfrac{ \Delta \left( b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 \right) }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right| \\
+&= \left| 0.0509 \cdot 0.13235 \right| \\
 &= 0.00674\\[4mm]
 \therefore \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } &= 0.0509 \pm 0.00674
 \end{align*}
 \begin{align*}
 \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } &= \dfrac{ 1.0 }{ 19.64709 } \\
 &= 0.0509 \\[4mm]
-\Delta \left( \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right) &= \left| \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right|\sqrt{ \left( \dfrac{ \Delta 1 }{ 1 } \right) ^ { 2 } + \left( \dfrac{ \Delta b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right) ^ { 2 }} \\
-&= \left| 0.0509 \right|\sqrt{ 0.0 ^ { 2 } + 0.13235 ^ { 2 }} \\
+\Delta \left( \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right) &= \left| \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \cdot \dfrac{ \Delta \left( b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 \right) }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } \right| \\
+&= \left| 0.0509 \cdot 0.13235 \right| \\
 &= 0.00674\\[4mm]
 \therefore \dfrac{ 1 }{ b + log_{ 10 }\left( a + 5 \cdot d ^ { 2 } \right) \cdot 5 } &= 0.0509 \pm 0.00674
 \end{align*}

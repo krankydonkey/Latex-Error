@@ -27,7 +27,7 @@ class Number:
         string = "\\begin{align*}\n" \
                 + self.string + " &= " + self.string_nums + " \\\\\n" \
                 + "&= " + rstr(self.value) + " \\\\[4mm]\n" \
-                + diff(enclose(self.string)) + " &= " + self.error_vars \
+                + diff(self.string) + " &= " + self.error_vars \
                 + " \\\\\n" + "&= " + self.error_nums + " \\\\\n" \
                 + "&= " + rstr(self.error) + "\\\\[4mm]\n" \
                 + "\\therefore " + self.string + " &= " + rstr(self.value) \
@@ -52,7 +52,7 @@ def mag(string):
 
 # Appends the delta symbol to the start of the given string.
 def diff(string):
-    return "\\Delta " + string
+    return "\\Delta " + enclose(string)
 
 # Returns the string natural log of the given string.
 def natlog(string):
@@ -86,10 +86,17 @@ def percent_var(num):
 # and subtraction.
 def addsub(num1, num2, value, string, string_nums):
     error = math.sqrt(num1.error**2 + num2.error**2)
-    error_vars = root(square(diff(enclose(num1.string))) + ADD \
-            + square(diff(enclose(num2.string))))
-    error_nums = root(square(rstr(num1.error)) + ADD \
-            + square(rstr(num2.error)))
+    if num1.isConstant():
+        error_vars = diff(num2.string)
+        error_nums = ""
+    elif num2.isConstant():
+        error_vars = diff(num1.string)
+        error_nums = ""
+    else:
+        error_vars = root(square(diff(num1.string)) + ADD \
+                + square(diff(num2.string)))
+        error_nums = root(square(rstr(num1.error)) + ADD \
+                + square(rstr(num2.error)))
     return Number(value, string, error, string_nums, error_vars, error_nums)
 
 def add(num1, num2):
@@ -117,10 +124,17 @@ def negative(num):
 # and division.
 def muldiv(num1, num2, value, string, string_nums):
     error = abs(value*math.sqrt(percent(num1)**2 + percent(num2)**2))
-    error_vars = mag(string) + root(square(enclose(percent_var(num1))) \
-            + ADD + square(enclose(percent_var(num2))))
-    error_nums = mag(rstr(value)) + root(square(rstr(percent(num1))) + ADD \
-            + square(rstr(percent(num2))))
+    if num1.isConstant():
+        error_vars = mag(string + PRODUCT + percent_var(num2))
+        error_nums = mag(rstr(value) + PRODUCT + rstr(percent(num2)))
+    elif num2.isConstant():
+        error_vars = mag(string + PRODUCT + percent_var(num1))
+        error_nums = mag(rstr(value) + PRODUCT + rstr(percent(num1)))
+    else:
+        error_vars = mag(string) + root(square(enclose(percent_var(num1))) \
+                + ADD + square(enclose(percent_var(num2))))
+        error_nums = mag(rstr(value)) + root(square(rstr(percent(num1))) + ADD \
+                + square(rstr(percent(num2))))
     return Number(value, string, error, string_nums, error_vars, error_nums)
 
 def multiply(num1, num2):
@@ -248,7 +262,7 @@ def asin(num):
     string_nums = "\\arcsin " + enclose(rstr(num.value))
     error = num.error/math.sqrt(1-num.value**2)
     error_vars = fraction("1", root("1 - " + square(enclose(num.string)))) \
-            + PRODUCT + diff(enclose(num.string))
+            + PRODUCT + diff(num.string)
     error_nums = fraction("1", root("1 - " + square(rstr(num.value)))) \
             + PRODUCT + rstr(num.value)
     return Number(value, string, error, string_nums, error_vars, error_nums)
@@ -259,7 +273,7 @@ def acos(num):
     string_nums = "\\arccos " + enclose(rstr(num.value))
     error = num.error/math.sqrt(1-num.value**2)
     error_vars = fraction("1", root("1 - " + square(enclose(num.string)))) \
-            + PRODUCT + diff(enclose(num.string))
+            + PRODUCT + diff(num.string)
     error_nums = fraction("1", root("1 - " + square(rstr(num.value)))) \
             + PRODUCT + rstr(num.value)
     return Number(value, string, error, string_nums, error_vars, error_nums)
@@ -270,7 +284,7 @@ def atan(num):
     string_nums = "\\arctan " + enclose(rstr(num.value))
     error = num.error/(num.value**2 + 1)
     error_vars = fraction("1", square(enclose(num.string)) + " + 1") \
-            + PRODUCT + diff(enclose(num.string))
+            + PRODUCT + diff(num.string)
     error_nums = fraction("1", square(rstr(num.string)) + " + 1") \
             + PRODUCT + rstr(num.string)
     return Number(value, string, error, string_nums, error_vars, error_nums)
@@ -281,7 +295,7 @@ def asinh(num):
     string_nums = "\\text{arcsinh} " + enclose(rstr(num.value))
     error = num.error/math.sqrt(num.value**2 + 1)
     error_vars = fraction("1", root(square(enclose(num.string)) + " + 1")) \
-            + PRODUCT + diff(enclose(num.string))
+            + PRODUCT + diff(num.string)
     error_nums = fraction("1", root(square(rstr(num.value)) + " + 1")) \
             + PRODUCT + rstr(num.value)
     return Number(value, string, error, string_nums, error_vars, error_nums)
@@ -292,7 +306,7 @@ def acosh(num):
     string_nums = "\\text{arccosh} " + enclose(rstr(num.value))
     error = num.error/math.sqrt(num.value**2 - 1)
     error_vars = fraction("1", root(square(enclose(num.string)) + " - 1")) \
-            + PRODUCT + diff(enclose(num.string))
+            + PRODUCT + diff(num.string)
     error_nums = fraction("1", root(square(rstr(num.value)) + " - 1")) \
             + PRODUCT + rstr(num.value)
     return Number(value, string, error, string_nums, error_vars, error_nums)
@@ -303,14 +317,14 @@ def atanh(num):
     string_nums = "\\text{arctanh} " + enclose(rstr(num.value))
     error = num.error/(1-num.value**2)
     error_vars = fraction("1", "1 - "  + square(enclose(num.string))) \
-            + PRODUCT + diff(enclose(num.string))
+            + PRODUCT + diff(num.string)
     error_nums = fraction("1", "1 - " + square(rstr(num.string))) \
             + PRODUCT + rstr(num.string)
     return Number(value, string, error, string_nums, error_vars, error_nums)
 
 """
 def complicated(func, num):
-    errorNum = Number(num.error, diff(enclose(num.string)))
+    errorNum = Number(num.error, diff(num.string))
     num1 = func(num)
     num2 = func(add(num, errorNum))
     error = abs(num1.value - num2.value)
