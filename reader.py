@@ -1,9 +1,8 @@
 from number import Number
 from shunt import Shunt
 
-def read_structure(file):
+def read_structure(line):
     structure = []
-    line = file.readline().strip()
     line = line.replace(" ", "")
     line = line.split(",")
     count = 0
@@ -18,10 +17,7 @@ def read_structure(file):
             structure.append((var, False))   
     return structure
 
-def read_vars(file, structure, variables):
-    line = file.readline()
-    if not line:
-        return False
+def read_vars(line, structure, variables):
     line = line.replace(" ", "")
     line = (line.strip()).split(",")
     count = 0

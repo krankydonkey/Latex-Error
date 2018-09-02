@@ -28,7 +28,7 @@ class Number:
                 + self.string + " &= " + self.string_nums + " &\\\\\n" \
                 + "&= " + rstr(self.value) + " &\\\\[4mm]\n" \
                 + diff(self.string) + " &= " + self.error_vars \
-                + " \\\\\n" + "&= " + self.error_nums + " &\\\\\n" \
+                + " \\\\[2mm]\n" + "&= " + self.error_nums + " &\\\\[1mm]\n" \
                 + "&= " + rstr(self.error) + " &\\\\[4mm]\n" \
                 + "\\therefore " + self.string + " &= " + rstr(self.value) \
                 + " \\pm " + rstr(self.error) + " &\n" \
