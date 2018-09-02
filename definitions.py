@@ -16,9 +16,10 @@ class Operator:
         
 
 class Function:
-    def __init__(self, string, function):
+    def __init__(self, string, function, numArgs):
         self.string = string
         self.function = function
+        self.args = numArgs
     
     def __str__(self):
         return self.string
@@ -36,23 +37,23 @@ OPERATORS = {
 }
 
 FUNCTIONS = {
-    "-" : Function("-", negative),
-    "sqrt" : Function("sqrt", sqrt),
-    "exp" : Function("exp", exp),
-    "sin" : Function("sin", sin),
-    "cos" : Function("cos", cos),
-    "tan" : Function("tan", tan),
-    "sinh" : Function("sinh", sinh),
-    "cosh" : Function("cosh", cosh),
-    "tanh" : Function("tanh", tanh),
-    "asin" : Function("asin", asin),
-    "acos" : Function("acos", acos),
-    "atan" : Function("atan", atan),
-    "asinh" : Function("asinh", asinh),
-    "acosh" : Function("acosh", acosh),
-    "atanh" : Function("atanh", atanh),
-    "ln" : Function("ln", ln),
-    "log" : Function("log", log)
+    "-" : Function("-", negative, 1),
+    "sqrt" : Function("sqrt", sqrt, 1),
+    "exp" : Function("exp", exp, 1),
+    "sin" : Function("sin", sin, 1),
+    "cos" : Function("cos", cos, 1),
+    "tan" : Function("tan", tan, 1),
+    "sinh" : Function("sinh", sinh, 1),
+    "cosh" : Function("cosh", cosh, 1),
+    "tanh" : Function("tanh", tanh, 1),
+    "asin" : Function("asin", asin, 1),
+    "acos" : Function("acos", acos, 1),
+    "atan" : Function("atan", atan, 1),
+    "asinh" : Function("asinh", asinh, 1),
+    "acosh" : Function("acosh", acosh, 1),
+    "atanh" : Function("atanh", atanh, 1),
+    "ln" : Function("ln", ln, 1),
+    "log" : Function("log", log, 2)
 }
 
 CONSTANTS = {

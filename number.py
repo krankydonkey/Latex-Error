@@ -36,7 +36,10 @@ class Number:
         return string
 
 def rstr(number):
-    return str(round(number, DECIMALS))
+    if number % 1 == 0:
+        return str(int(number))
+    else:
+        return str(round(number, DECIMALS))
 
 # Encloses the given string in latex brackets.
 def enclose(string):
@@ -241,7 +244,9 @@ def ln(num):
     error_nums = mag(fraction(rstr(num.error), rstr(num.value)))
     return Number(value, string, error, string_nums, error_vars, error_nums)
 
-def log(base, num):
+def log(args):
+    num = args[1]
+    base = int((args[0]).value)
     value = math.log(num.value, base)
     string = little("log", rstr(base)) + enclose(num.string)
     string_nums = little("log", rstr(base)) + enclose(rstr(num.value))
@@ -368,9 +373,7 @@ def seperate(string):
         index += 1
     denominator = string[start:index-1]
     return(denominator)
-    
-string = "\\dfrac{fik}{fek}"
-print(seperate(string))
+
 
 
 

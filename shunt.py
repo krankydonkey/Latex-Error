@@ -5,6 +5,7 @@ class Shunt:
     def __init__(self):
         self.output = []
         self.operators = []
+        self.args = []
         self.prevOp = True
 
     # Determines wether the given string is a number, variable, or function,
@@ -14,11 +15,7 @@ class Shunt:
             return
         elif string in FUNCTIONS:
             self.operators.append(FUNCTIONS.get(string))
-        elif string[0:3] == "log":
-            function = FUNCTIONS.get("log")
-            base = int(string[3:])
-            function.function = partial(function.function, base)
-            self.operators.append(function)
+            self.args.append(1)
         else:
             self.output.append(string)
         self.prevOp = False
@@ -45,6 +42,14 @@ class Shunt:
                 break
         self.operators.append(operator)
 
+    def consume_until_bracket(self):
+        while self.operators:
+            prev = self.operators[-1]
+            if prev == '(':
+                break
+            else:
+                self.output.append(self.operators.pop())
+
     # Pops operators from the operators stack and appends them to the output until
     # a left bracket ')' is found. If no bracket is found, a SyntaxError is raised.
     # If the operator before the bracket is a function, it is also appended.
@@ -61,7 +66,9 @@ class Shunt:
         if self.operators:
             operator = self.operators[-1]
             if type(operator) is Function:
-                self.output.append(self.operators.pop())
+                function = self.operators.pop()
+                function.args = self.args.pop()
+                self.output.append(function)
 
 
     # Takes an infix notation expression and converts it to postfix.
@@ -76,6 +83,11 @@ class Shunt:
                 else:
                     self.consume(OPERATORS.get(char))
                 self.prevOp = True
+            elif char == ',':
+                self.process(current)
+                self.consume_until_bracket()
+                self.args[-1] += 1
+                current = ""
             elif char == '(':
                 self.process(current)
                 current = ""

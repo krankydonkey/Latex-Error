@@ -12,8 +12,14 @@ def rpn(output, variables, file):
             file.write(evaluated.getError() + "\n")
             stack.append(evaluated)
         elif type(element) is Function:
-            num = stack.pop()
-            evaluated = element.function(num)
+            count = 0
+            args = []
+            while count < element.args:
+                args.append(stack.pop())
+                count += 1
+            if len(args) == 1:
+                args = args[0]
+            evaluated = element.function(args)
             file.write(evaluated.getError() + "\n")
             stack.append(evaluated)
         else:

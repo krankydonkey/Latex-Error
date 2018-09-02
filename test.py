@@ -14,11 +14,9 @@ variables = {
     "c" : num3,
     "d" : num4
 }
-expression = "1/((b+log10(a+5*d^2))*5)"
+expression = "1/((b+log(a+6*d^2, 10))*5)"
 shunter = Shunt()
 output = shunter.convert(expression)
-print(output)
-
 
 file = open("testout.tex", 'w')
 file.write("\\documentclass[a4paper]{article}\n")
@@ -27,7 +25,6 @@ file.write("\\usepackage{amssymb}\n")
 file.write("\\begin{document}\n")
 
 number = rpn(output, variables, file)
-print(number.getError())
 file.write(number.getError()+"\n")
 
 
