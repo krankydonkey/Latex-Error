@@ -47,19 +47,3 @@ def read_formula(file):
         shunted = shunt.convert(equation[1])
         equations.append((equation[0], shunted))
     return equations
-
-
-        
-"""
-file = open("variables.csv", 'r')
-variables = {}
-structure = read_structure(file)
-read_vars(file, structure, variables)
-print(variables)
-read_vars(file, structure, variables)
-print(variables)
-read_vars(file, structure, variables)
-print(variables)
-"""
-file = open("formulas.txt", 'r')
-print(read_formula(file))

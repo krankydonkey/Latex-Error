@@ -28,7 +28,6 @@ while line:
     line = line.strip()
     string += line
     read_vars(line, structure, variables)
-    output_csv.write(string)
     for equation in equations:
         answer = rpn(equation[1], variables, output_file, samples)
         answer.string = equation[0]
@@ -38,7 +37,6 @@ while line:
     samples = False
     string += "\n"
     line = variable_file.readline()
-
 output_csv.write(string[:-1])
 output_file.write("\\end{document}")
 output_file.close()
